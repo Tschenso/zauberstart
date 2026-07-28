@@ -45,6 +45,7 @@ jobs:
       - name: Build static site
         env:
           NEXT_PUBLIC_SITE_URL: https://tschenso.github.io/zauberstart
+          ZAUBERSTART_GITHUB_PAGES: "true"
         run: pnpm build:pages
 
       - name: Upload Pages artifact
