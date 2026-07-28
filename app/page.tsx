@@ -117,15 +117,6 @@ const basicRules = [
   },
 ];
 
-const zones = [
-  ["Bibliothek", "Dein verdeckter Nachziehstapel."],
-  ["Hand", "Karten, die nur du sehen und spielen kannst."],
-  ["Schlachtfeld", "Hier liegen bleibende Karten: Länder, Kreaturen und mehr."],
-  ["Friedhof", "Offener Ablagestapel für zerstörte, abgeworfene und verrechnete Karten."],
-  ["Exil", "Ein eigener Bereich außerhalb des Friedhofs; Rückkehr nur, wenn eine Karte es erlaubt."],
-  ["Stapel", "Warteschlange für Zaubersprüche und Fähigkeiten – zuletzt hinein, zuerst heraus."],
-];
-
 function LifeCounter({
   name,
   accent,
@@ -183,7 +174,9 @@ export default function Home() {
           <a href="#grundlagen">Grundlagen</a>
           <a href="#begriffe">Kartenregeln</a>
         </nav>
-        <a className="quick-link" href="#zaehler">LP zählen <span>↓</span></a>
+        <button className="quick-link print-trigger" onClick={() => window.print()}>
+          Druckansicht <span>⌁</span>
+        </button>
       </header>
 
       <section className="hero" id="start">
@@ -196,14 +189,24 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="primary-button" href="#zug">Zug starten <span>→</span></a>
-            <a className="text-link" href="#grundlagen">Erst die Grundlagen</a>
+            <button className="text-link print-trigger-inline" onClick={() => window.print()}>
+              Lernhilfe drucken
+            </button>
           </div>
         </div>
         <div className="hero-card" aria-label="Merksatz">
-          <div className="orb orb-one" />
-          <div className="orb orb-two" />
+          <div className="arcane-ring" aria-hidden="true">
+            <span>✦</span>
+          </div>
           <div className="card-inner">
-            <span className="card-kicker">MERKE</span>
+            <div className="mana-row" aria-hidden="true">
+              <i className="mana-white" />
+              <i className="mana-blue" />
+              <i className="mana-black" />
+              <i className="mana-red" />
+              <i className="mana-green" />
+            </div>
+            <span className="card-kicker">GRUNDGESETZ DER MAGIE</span>
             <strong>Lesen schlägt Erinnern.</strong>
             <p>Der Text auf einer Karte darf die normalen Regeln verändern. Was auf der Karte steht, gilt.</p>
             <div className="card-rule" />
@@ -294,27 +297,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="zones-section" id="zonen">
-        <div className="zones-title">
-          <span className="section-number">03</span>
-          <h2>Wo liegt welche Karte?</h2>
-          <p>Sechs Zonen, die ständig vorkommen.</p>
-        </div>
-        <div className="zones-list">
-          {zones.map(([title, text], index) => (
-            <div className="zone-row" key={title}>
-              <span className="zone-index">{String(index + 1).padStart(2, "0")}</span>
-              <strong>{title}</strong>
-              <p>{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="keywords-section" id="begriffe">
         <div className="section-heading">
           <div>
-            <span className="section-number">04</span>
+            <span className="section-number">03</span>
             <h2>Kartenwörter<br />schnell erklärt</h2>
           </div>
           <div className="search-wrap">
@@ -371,6 +357,87 @@ export default function Home() {
             <h3>Offen spielen</h3>
             <p>Für Lernpartien: Hände offen zeigen, Entscheidungen erklären und Fehler zurücknehmen. Das macht Regeln schneller verständlich.</p>
           </article>
+        </div>
+      </section>
+
+      <section className="print-only" aria-label="Druckbare Magic-Lernhilfe">
+        <header className="print-header">
+          <div>
+            <span className="print-kicker">ZAUBERSTART · SPIELTISCH-HILFE</span>
+            <h1>Magic lernen.<br />Zug für Zug.</h1>
+          </div>
+          <div className="print-rule">
+            <strong>Goldene Regel</strong>
+            <p>Widerspricht ein Kartentext den normalen Regeln, gilt der Kartentext.</p>
+          </div>
+        </header>
+
+        <div className="print-page">
+          <div className="print-section-title">
+            <span>01</span>
+            <h2>Der Zug</h2>
+          </div>
+          <div className="print-turn-grid">
+            {turnSteps.map((step, index) => (
+              <article key={step.short}>
+                <b>{String(index + 1).padStart(2, "0")}</b>
+                <div>
+                  <h3>{step.short}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="print-section-title">
+            <span>02</span>
+            <h2>Sechs Grundregeln</h2>
+          </div>
+          <div className="print-basics-grid">
+            {basicRules.map((rule) => (
+              <article key={rule.n}>
+                <b>{rule.n}</b>
+                <h3>{rule.title}</h3>
+                <p>{rule.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="print-page print-break">
+          <div className="print-section-title">
+            <span>03</span>
+            <h2>Kartenwörter</h2>
+          </div>
+          <div className="print-keyword-grid">
+            {keywordRules.map((rule) => (
+              <article key={rule.term}>
+                <span className="print-icon">{rule.icon}</span>
+                <div>
+                  <h3>{rule.term}</h3>
+                  <p>{rule.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="print-reminders">
+            <h2>Vier Merksätze</h2>
+            <div>
+              <p><strong>Deckbau:</strong> mindestens 60 Karten, höchstens vier mit gleichem Namen – außer Standardländern.</p>
+              <p><strong>Einsatzverzögerung:</strong> Neu gespielte Kreaturen dürfen sofort blocken, aber meist noch nicht angreifen oder {`{T}`}-Fähigkeiten nutzen.</p>
+              <p><strong>Blockiert bleibt blockiert:</strong> Verschwindet der Blocker, trifft der Angreifer ohne Trampelschaden trotzdem nicht durch.</p>
+              <p><strong>Lernpartie:</strong> Hände offen zeigen, Entscheidungen erklären und Fehler gemeinsam zurücknehmen.</p>
+            </div>
+          </div>
+
+          <div className="print-life">
+            <h2>Lebenspunkte notieren</h2>
+            <div className="print-life-grid">
+              <div><strong>Spieler:in 1</strong><span>20</span><i /></div>
+              <div><strong>Spieler:in 2</strong><span>20</span><i /></div>
+            </div>
+          </div>
         </div>
       </section>
 
