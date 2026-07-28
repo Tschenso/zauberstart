@@ -394,6 +394,7 @@ h1 em {
   grid-template-columns: auto 1fr;
   align-items: start;
   gap: 18px;
+  min-width: 0;
 }
 
 .section-number {
@@ -1028,7 +1029,7 @@ footer > a {
 
   .section-heading h2,
   .missing-title h2 {
-    font-size: 3.2rem;
+    font-size: clamp(2.3rem, 11.5vw, 3.2rem);
   }
 
   .section-heading > p {
