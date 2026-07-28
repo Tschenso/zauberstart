@@ -61,6 +61,7 @@ a {
 }
 
 .brand {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 11px;
@@ -108,7 +109,11 @@ footer a:hover {
 
 .quick-link {
   justify-self: end;
+  min-height: 44px;
   padding: 11px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--gold);
   background: transparent;
   color: var(--paper);
@@ -235,6 +240,9 @@ h1 em {
 }
 
 .text-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   border: 0;
   border-bottom: 1px solid var(--gold);
   padding: 0 0 3px;
@@ -459,7 +467,10 @@ h1 em {
 }
 
 .reset-mini {
+  min-height: 44px;
   padding: 6px 9px;
+  display: inline-flex;
+  align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: transparent;
   border-radius: 999px;
@@ -647,8 +658,11 @@ h1 em {
 }
 
 .phase-navigation button {
+  min-height: 44px;
   width: fit-content;
   padding: 10px 0;
+  display: inline-flex;
+  align-items: center;
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -969,6 +983,7 @@ footer > a {
   }
 
   .quick-link {
+    min-height: 44px;
     padding: 9px 12px;
   }
 
@@ -1056,6 +1071,14 @@ footer > a {
 
   .phase-navigation {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .phase-navigation button,
+  .reset-mini,
+  footer > a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .progress-dots {
